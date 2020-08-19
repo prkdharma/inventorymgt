@@ -1,31 +1,30 @@
-package com.dxctraining.inventorymgt.supplier.entities;
-
-import java.util.Set;
+package com.dxctraining.inventorymgt.item.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 
-import com.dxctraining.inventorymgt.item.entities.Item;
+import com.dxctraining.inventorymgt.supplier.entities.Supplier;
 
 @Entity
-public class Supplier {
-
+public class Item {
+	
 	@Id
 	@GeneratedValue
 	private int id;
 	private String name;
-
-	@OneToMany(mappedBy = "supplier")
-	private Set<Item> item;
-
-	public Supplier(String name) {
-		this.name = name;
-	}
-
-	public Supplier() {
+	
+	@ManyToOne
+	private Supplier supplier;
+	
+	public Item() {
 		
+	}
+	
+	public Item(String name, Supplier supplier) {
+		this.name = name;
+		this.supplier = supplier;
 	}
 
 	public int getId() {
@@ -44,23 +43,29 @@ public class Supplier {
 		this.name = name;
 	}
 
+	public Supplier getSupplier() {
+		return supplier;
+	}
+
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
+	}
 	@Override
 	public int hashCode() {
 		return id;
 	}
-
+	
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) {
+		if(this == o) {
 			return true;
 		}
-		if (o == null || !(o instanceof Supplier)) {
+		if(o == null || !(o instanceof Item)) {
 			return false;
 		}
-		Supplier that = (Supplier) o;
+		Item that = (Item)o;
 		boolean isequals = this.id == that.id;
 		return isequals;
-
+		
 	}
-
 }
