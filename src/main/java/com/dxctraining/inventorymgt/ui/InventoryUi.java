@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.dxctraining.inventorymgt.item.entities.Item;
+import com.dxctraining.inventorymgt.item.entities.Phone;
 import com.dxctraining.inventorymgt.item.entities.Computer;
 import com.dxctraining.inventorymgt.item.service.IItemService;
 import com.dxctraining.inventorymgt.supplier.entities.Supplier;
@@ -48,14 +49,21 @@ public class InventoryUi {
 			list.add(item3);
 			itemService.addItem(item3);
 
-			Computer item6 = new Computer("lenovo", supplier1, 1024);
-			Computer item7 = new Computer("asus", supplier2, 1024);
+			Computer item4 = new Computer("lenovo", supplier1, 1024);
+			Computer item5 = new Computer("asus", supplier2, 1024);
 
+			list.add(item4);
+			itemService.addItem(item4);
+			list.add(item5);
+			itemService.addItem(item5);
+            
+			Phone item6 = new Phone("lava", supplier1, 256);
 			list.add(item6);
 			itemService.addItem(item6);
+			Phone item7 = new Phone("karbonn", supplier2, 128);
 			list.add(item7);
 			itemService.addItem(item7);
-
+			
 			System.out.println("supplier details");
 			int id1 = supplier1.getId();
 			Supplier fetched = supplierService.findById(id1);
@@ -67,11 +75,18 @@ public class InventoryUi {
 			System.out.println("removed item id is " + itemid3);
 			
 			System.out.println("fetching computer item");
-			int itemid1 = item6.getId();
-			Computer computer=(Computer)item6;
+			int itemid1 = item4.getId();
+			Computer computer=(Computer)item4;
 			Item itemfetched = itemService.findById(itemid1);
 			System.out.println("fetched item id is "+itemfetched.getId()+" fetched item name is "+itemfetched.getName());
 			System.out.println("computer disk size is "+computer.getDiscSize());
+            
+			System.out.println("fetching phone item");
+			int itemid2 = item6.getId();
+			Phone phone=(Phone)item6;
+			Item itemfetched1 = itemService.findById(itemid2);
+			System.out.println("fetched item id is "+itemfetched1.getId()+" fetched item name is "+itemfetched1.getName());
+			System.out.println("storage size size is "+phone.getStorageSize());
 
 		} catch (InvalidSupplierArgumentException e) {
 			e.printStackTrace();
